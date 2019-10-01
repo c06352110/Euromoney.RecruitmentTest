@@ -9,12 +9,10 @@ namespace ContentConsole.Filter
     public class FilterBySplittingWordsStrategy : IFilterStrategy
     {
         private readonly IEnumerable<string> _listOfNegativeWords;
-        private readonly bool _disabledFiltering;
 
-        public FilterBySplittingWordsStrategy(INegativeWordRepository negativeWordRepository, bool disabledFiltering = false)
+        public FilterBySplittingWordsStrategy(INegativeWordRepository negativeWordRepository)
         {
             _listOfNegativeWords = negativeWordRepository.GetListOfNegativeWords().Select(x => x.ToLower());
-            _disabledFiltering = disabledFiltering;
         }
 
         public int CountNegativeWords(string content)
@@ -25,9 +23,9 @@ namespace ContentConsole.Filter
                 y => y.Equals(RemoveSymbolsAndNumbers(x))));
         }
 
-        public string FilterNegativeWords(string content)
+        public string FilterNegativeWords(string content, bool disabledFiltering)
         {
-            if (_disabledFiltering)
+            if (disabledFiltering)
             {
                 return content;
             }

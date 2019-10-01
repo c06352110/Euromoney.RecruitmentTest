@@ -1,16 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
-using ContentConsole.Data;
 
-namespace ContentConsole
+namespace ContentConsole.Data
 {
     public class NegativeWordRepository : INegativeWordRepository
     {
         private readonly List<string> _listOfNegativeWords;
 
-        public NegativeWordRepository(List<string> listOfNegativeWords)
+        public NegativeWordRepository()
         {
-            _listOfNegativeWords = listOfNegativeWords;
+            _listOfNegativeWords = new List<string>
+            {
+                "swine",
+                "bad",
+                "nasty",
+                "horrible"
+            };
         }
 
         public void AddAWord(string wordToAdd)
